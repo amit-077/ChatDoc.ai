@@ -1,4 +1,4 @@
-const PDFParser = require("pdf-parse");
+const PDFParser = require("pdf-parse");//
 const { DataAPIClient } = require("@datastax/astra-db-ts");
 const { RecursiveCharacterTextSplitter } = require("langchain/text_splitter");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
@@ -108,7 +108,7 @@ const runCode = async () => {
   await db.dropCollection()
 };
 
-runCode();
+// runCode();
 
 // --------------------------------------------  EXPRESS SERVER  -------------------------------------------------------
 
@@ -124,7 +124,7 @@ app.post("/message", async (req, res) => {
     console.log(message);
     const result = await model.embedContent(message);
 
-    const collection = db.collection("GraceHartmann");
+    const collection = db.collection("LeslieMatusow");
 
     const cursor = collection.find(null, {
       sort: {
@@ -144,7 +144,7 @@ app.post("/message", async (req, res) => {
     const outputResult = await model1.generateContent(`
         Act as a AI bot that will give answers based on the context provided to you. Make sure that you only answer the questions
         that are related to the context. If any question is asked out of the context, then simply respond as "I am sorry, I don't know the answer".
-        You are allowed to elaborate or simplify the data of the context, but not change it. Below is the given context.
+        You are allowed to elaborate or simplify the data of the context, but not change its meaning. Below is the given context.
         ${docContext}
         If the user asks you to explain or summarize, you can do that, but if it is out of context, simply respond as "I am sorry, I don't know the answer".
         And don't mention about the context in the answer. Only use the context data to answer the questions. The context will contain many data, but you have to just
